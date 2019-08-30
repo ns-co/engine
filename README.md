@@ -239,6 +239,7 @@ Makefile.local:
   USE_CURL_DLOPEN    - link with libcurl at runtime
   USE_CODEC_VORBIS   - enable Ogg Vorbis support
   USE_CODEC_OPUS     - enable Ogg Opus support
+  USE_CODEC_XMP      - enable libxmp support for Module player
   USE_MUMBLE         - enable Mumble support
   USE_VOIP           - enable built-in VoIP support
   USE_INTERNAL_SPEEX - build internal speex library instead of dynamically
