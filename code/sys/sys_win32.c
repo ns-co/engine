@@ -20,6 +20,14 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 ===========================================================================
 */
 
+#ifndef DEDICATED
+#ifdef USE_LOCAL_HEADERS
+#	include "SDL.h"
+#else
+#	include <SDL.h>
+#endif
+#endif
+
 #include "../qcommon/q_shared.h"
 #include "../qcommon/qcommon.h"
 #include "sys_local.h"
@@ -681,7 +689,9 @@ dialogResult_t Sys_Dialog( dialogType_t type, const char *message, const char *t
 }
 
 #ifndef DEDICATED
+#if SDL_MAJOR_VERSION != 2
 static qboolean SDL_VIDEODRIVER_externallySet = qfalse;
+#endif
 #endif
 
 /*
@@ -694,12 +704,14 @@ Windows specific "safe" GL implementation initialisation
 void Sys_GLimpSafeInit( void )
 {
 #ifndef DEDICATED
+#if SDL_MAJOR_VERSION != 2
 	if( !SDL_VIDEODRIVER_externallySet )
 	{
 		// Here, we want to let SDL decide what do to unless
 		// explicitly requested otherwise
 		_putenv( "SDL_VIDEODRIVER=" );
 	}
+#endif
 #endif
 }
 
@@ -713,6 +725,7 @@ Windows specific GL implementation initialisation
 void Sys_GLimpInit( void )
 {
 #ifndef DEDICATED
+#if SDL_MAJOR_VERSION != 2
 	if( !SDL_VIDEODRIVER_externallySet )
 	{
 		// It's a little bit weird having in_mouse control the
@@ -730,6 +743,7 @@ void Sys_GLimpInit( void )
 			_putenv( "SDL_VIDEODRIVER=directx" );
 		}
 	}
+#endif
 #endif
 }
 #ifndef DEDICATED
@@ -764,6 +778,7 @@ void Sys_PlatformInit( void )
 
 #endif
 
+#if SDL_MAJOR_VERSION != 2
 	if( SDL_VIDEODRIVER )
 	{
 		Com_Printf( "SDL_VIDEODRIVER is externally set to \"%s\", "
@@ -772,6 +787,7 @@ void Sys_PlatformInit( void )
 	}
 	else
 		SDL_VIDEODRIVER_externallySet = qfalse;
+#endif
 
 	// leilei - no 3dfx splashes please
 		_putenv("FX_GLIDE_NO_SPLASH=1");
