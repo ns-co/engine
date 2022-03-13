@@ -1,0 +1,14 @@
+FROM ubuntu:20.04
+
+# Ubuntu 20.04 timezone fix
+ENV TZ=UTC
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+RUN apt-get update && apt-get install --no-install-recommends -y build-essential libgl1-mesa-dev libsdl2-dev libvorbis-dev libfreetype6-dev mingw-w64
+
+RUN mkdir -p /staging/openarena
+
+COPY . /staging/openarena
+
+RUN cd /staging/openarena && \
+./travis-ci-build.sh
