@@ -337,8 +337,8 @@ void RotatePointAroundVector( vec3_t dst, const vec3_t dir, const vec3_t point,
 	zrot[1][0] = -sin( rad );
 	zrot[1][1] = cos( rad );
 
-	MatrixMultiply( m, zrot, tmpmat );
-	MatrixMultiply( tmpmat, im, rot );
+	Q_MatrixMultiply( m, zrot, tmpmat );
+	Q_MatrixMultiply( tmpmat, im, rot );
 
 	for ( i = 0; i < 3; i++ ) {
 		dst[i] = rot[i][0] * point[0] + rot[i][1] * point[1] + rot[i][2] * point[2];
@@ -1033,10 +1033,10 @@ void Matrix4Multiply(const float a[16], const float b[16], float out[16])
 
 /*
 ================
-MatrixMultiply
+Q_MatrixMultiply
 ================
 */
-void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]) {
+void Q_MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]) {
 	out[0][0] = in1[0][0] * in2[0][0] + in1[0][1] * in2[1][0] +
 				in1[0][2] * in2[2][0];
 	out[0][1] = in1[0][0] * in2[0][1] + in1[0][1] * in2[1][1] +

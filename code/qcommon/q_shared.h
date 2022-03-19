@@ -709,7 +709,7 @@ qboolean Matrix4Compare(const float a[16], const float b[16]);
 void Matrix4Copy(const float in[16], float out[16]);
 void Matrix4Multiply(const float a[16], const float b[16], float out[16]);
 
-void MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]);
+void Q_MatrixMultiply(float in1[3][3], float in2[3][3], float out[3][3]);
 void AngleVectors( const vec3_t angles, vec3_t forward, vec3_t right, vec3_t up);
 void PerpendicularVector( vec3_t dst, const vec3_t src );
 
